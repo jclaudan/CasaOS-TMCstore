@@ -2,20 +2,20 @@
   {
     "path": "/mariosemes/CasaOS-TMCstore",
     "title": "mariosemes/CasaOS-TMCstore: It's important to note that this App Store is not...",
-    "count": 192,
-    "uniques": 163
+    "count": 183,
+    "uniques": 154
   },
   {
     "path": "/mariosemes/CasaOS-TMCstore/tree/main/Apps",
     "title": "CasaOS-TMCstore/Apps at main · mariosemes/CasaOS-TMCstore · GitHub",
-    "count": 53,
-    "uniques": 22
+    "count": 43,
+    "uniques": 20
   },
   {
     "path": "/mariosemes/CasaOS-TMCstore/tree/main/Apps/nextcloud",
     "title": "CasaOS-TMCstore/Apps/nextcloud at main · mariosemes/CasaOS-TMCstore · GitHub",
-    "count": 16,
-    "uniques": 6
+    "count": 20,
+    "uniques": 7
   },
   {
     "path": "/mariosemes/CasaOS-TMCstore/tree/main/Apps/watchtower",
@@ -54,9 +54,9 @@
     "uniques": 2
   },
   {
-    "path": "/mariosemes/CasaOS-TMCstore/tree/main/.github/workflows",
-    "title": "CasaOS-TMCstore/.github/workflows at main · mariosemes/CasaOS-TMCstore",
-    "count": 5,
-    "uniques": 1
+    "path": "/mariosemes/CasaOS-TMCstore/blob/main/Apps/plex+absolute/thumbnail.png",
+    "title": "CasaOS-TMCstore/Apps/plex+absolute/thumbnail.png at main · mariosemes/CasaOS-...",
+    "count": 4,
+    "uniques": 2
   }
 ]
