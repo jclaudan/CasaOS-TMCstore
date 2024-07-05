@@ -15,7 +15,17 @@
     "uniques": 2
   },
   {
+    "referrer": "reddit.com",
+    "count": 1,
+    "uniques": 1
+  },
+  {
     "referrer": "DuckDuckGo",
+    "count": 1,
+    "uniques": 1
+  },
+  {
+    "referrer": "search.brave.com",
     "count": 1,
     "uniques": 1
   }
