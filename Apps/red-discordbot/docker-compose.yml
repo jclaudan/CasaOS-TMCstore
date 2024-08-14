@@ -61,7 +61,7 @@ services:
         en_us: Red Discord Bot with Streaming Capabilities
       tagline:
         en_us: A modular bot with video and audio streaming capabilities from VLC and a web browser.
-      thumbnail: https://path/to/your/thumbnail.png
+      # thumbnail: https://path/to/your/thumbnail.png
 
   ffmpeg:
     image: jrottenberg/ffmpeg:4.3-alpine  # Utilisez une version spécifique, pas "latest"
