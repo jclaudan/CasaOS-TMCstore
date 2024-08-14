@@ -1,20 +1,79 @@
-name: red-discordbot-tmc
+version: '3.8'
+
+name: red-discordbot-shinsekai
+
 services:
-  app:
-    container_name: red-discordbot
-    image: phasecorex/red-discordbot:full
+  red-discordbot-shinsekai:
+    image: red-discordbot-shinsekai:1.0.0  # Utilisez une version spécifique, pas "latest"
+    container_name: red-discordbot-shinsekai
+    build:
+      context: .
     environment:
       - PREFIX=.
       - PUID=$PUID
       - PGID=$PGID
       - TOKEN=<your-discord-token>
       - TZ=$TZ
+      - DISPLAY=:99  # Pour les applications graphiques
     volumes:
       - type: bind
-        source: /DATA/AppData/TMC-Store/$AppID/data
+        source: /DATA/AppData/$AppID/data
         target: /data
+      - /tmp/.X11-unix:/tmp/.X11-unix  # Nécessaire pour les applications graphiques
+    ports:
+      - "4444:4444"  # Port WebSocket OBS
+      - "5900:5900"  # Port VNC pour contrôler l'environnement graphique
     restart: unless-stopped
-    privileged: false
+    privileged: true
+    x-casaos:
+      envs:
+        - container: PUID
+          description:
+            en_us: User ID under which the bot will run.
+        - container: PGID
+          description:
+            en_us: Group ID under which the bot will run.
+        - container: TOKEN
+          description:
+            en_us: Discord bot token.
+        - container: TZ
+          description:
+            en_us: Time zone of the container.
+      ports:
+        - container: "4444"
+          description:
+            en_us: Port for OBS WebSocket.
+        - container: "5900"
+          description:
+            en_us: Port for VNC access to the graphical environment.
+      volumes:
+        - container: /data
+          description:
+            en_us: Directory for storing bot data.
+      description:
+        en_us: |
+          Red is a fully modular bot – meaning all features and commands can be enabled/disabled to your liking, making it completely customizable. This version includes capabilities for streaming video and audio from VLC and a web browser.
+      architectures:
+        - amd64
+        - arm64
+        - arm
+      main: red-discordbot-shinsekai
+      author: Your Name or Organization
+      category: Multimedia
+      icon: https://path/to/your/icon.png
+      title:
+        en_us: Red Discord Bot with Streaming Capabilities
+      tagline:
+        en_us: A modular bot with video and audio streaming capabilities from VLC and a web browser.
+      thumbnail: https://path/to/your/thumbnail.png
+
+  ffmpeg:
+    image: jrottenberg/ffmpeg:4.3-alpine  # Utilisez une version spécifique, pas "latest"
+    container_name: ffmpeg
+    command: ["-loglevel", "debug", "-i", "input", "-c:v", "libx264", "-f", "flv", "output"]
+    volumes:
+      - /DATA/AppData/$AppID/data:/data
+    restart: unless-stopped
 
 x-casaos:
   architectures:
@@ -22,20 +81,21 @@ x-casaos:
     - arm
     - arm64
   author: red-discordbot
-  category: TMCstore
+  category: ShinsekaiStore
   description:
-    en_us: Red is a fully modular bot – meaning all features and commands can be enabled/disabled to your liking, making it completely customizable. This is a self-hosted bot – meaning you will need to host and maintain your own instance. You can turn Red into an admin bot, music bot, trivia bot, new best friend or all of these together!
-  developer: red-discordbot
+    en_us: Red is a fully modular bot – meaning all features and commands can be enabled/disabled to your liking, making it completely customizable. This version includes capabilities for streaming video and audio from VLC and a web browser.
+  developer: Your Name or Organization
   icon: https://cdn.jsdelivr.net/gh/mariosemes/CasaOS-TMCstore@main/Apps/red-discordbot/icon.png
   index: /
   main: app
-  port_map: ""
   scheme: http
+  port_map: "4444"
   tagline:
-    en_us: Red is a fully modular bot – meaning all features and commands can be enabled/disabled to your liking, making it completely customizable.
-  store_app_id: red-discordbot-tmc
+    en_us: A modular bot with video and audio streaming capabilities from VLC and a web browser.
   title:
-    en_us: Red Discord Bot
+    en_us: Red Discord Bot with Streaming Capabilities
   screenshot_link:
     - https://cdn.jsdelivr.net/gh/mariosemes/CasaOS-TMCstore@main/Apps/red-discordbot/screenshot-01.png
-  thumbnail: https://cdn.jsdelivr.net/gh/mariosemes/CasaOS-TMCstore@main/Apps/red-discordbot/thumbnail.png
+  thumbnail: https://path/to/your/thumbnail.png
+
+
