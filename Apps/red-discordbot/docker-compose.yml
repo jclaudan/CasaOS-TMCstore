@@ -8,7 +8,7 @@ services:
       - PREFIX=.
       - PUID=1000
       - PGID=1000
-      - TOKEN=<your-discord-token>
+      - TOKEN=$DISCORD_TOKEN
       - TZ=Etc/UTC
       - DISPLAY=:99  # Pour les applications graphiques
     volumes:
