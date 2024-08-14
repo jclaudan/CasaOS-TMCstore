@@ -17,8 +17,8 @@ services:
         target: /data
       - /tmp/.X11-unix:/tmp/.X11-unix  # Nécessaire pour les applications graphiques
     ports:
-      - "4444:4444"  # Port WebSocket OBS
-      - "5900:5900"  # Port VNC pour contrôler l'environnement graphique
+      - "$PORT_OBS:4444"  # Port WebSocket OBS
+      - "PORT_OBS:5900"  # Port VNC pour contrôler l'environnement graphique
     restart: unless-stopped
     privileged: true
     x-casaos:
