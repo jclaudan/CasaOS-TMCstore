@@ -2,10 +2,8 @@ name: red-discordbot-shinsekai
 
 services:
   red-discordbot-shinsekai:
-    image: red-discordbot-shinsekai:1.0.0  # Utilisez une version spécifique, pas "latest"
+    image: ghcr.io/jclaudan/CasaOS-TMCstore:red-discordbot-shinsekai-1.0.0
     container_name: red-discordbot-shinsekai
-    build:
-      context: .
     environment:
       - PREFIX=.
       - PUID=1000
