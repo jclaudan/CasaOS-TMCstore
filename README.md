@@ -27,7 +27,7 @@ Please be aware that this Appstore is exclusively supported on CasaOS version 0.
 
 ## ⬇️ Download URL:
 
-    https://github.com/mariosemes/CasaOS-TMCstore/archive/refs/heads/main.zip
+    https://github.com/jclaudan/CasaOS-TMCstore/archive/refs/heads/main.zip
 
 <br />
 
