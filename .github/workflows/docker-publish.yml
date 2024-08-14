@@ -10,7 +10,7 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
-  TAG: red-discordbot-shinsekai-1.0.0  # Spécifiez ici le tag que vous voulez utiliser
+  TAG: red-discordbot-shinsekai-1.0.0
 
 jobs:
   build:
@@ -23,7 +23,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4  # Mise à jour vers v4
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -41,16 +41,16 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-          tags: ${{ env.TAG }}  # Utilisez le tag spécifié
+          tags: ${{ env.TAG }}
 
       - name: Build and push Docker image
         id: build-and-push
         uses: docker/build-push-action@v5
         with:
-          context: ./Apps/red-discordbot/  # Spécifie le contexte de construction
-          file: ./Apps/red-discordbot/Dockerfile  # Spécifie le chemin vers le Dockerfile
+          context: ./Apps/red-discordbot/
+          file: ./Apps/red-discordbot/Dockerfile
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.TAG }}  # Poussez l'image avec le tag spécifique
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.TAG }}
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
