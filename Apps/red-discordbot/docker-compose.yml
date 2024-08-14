@@ -6,6 +6,7 @@ services:
     container_name: red-discordbot-shinsekai
     environment:
       - PREFIX=.
+      - PREFIX2=!
       - PUID=1000
       - PGID=1000
       - TOKEN=$DISCORD_TOKEN
