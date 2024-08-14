@@ -19,13 +19,13 @@ services:
       - /tmp/.X11-unix:/tmp/.X11-unix  # Nécessaire pour les applications graphiques
     ports:
       - target: 4444
-        published: ${PORT_OBS:-4444}
+        published: ${PORT_OBS:-14444}
         protocol: tcp
       - target: 5900
-        published: ${PORT_VNC:-5900}
+        published: ${PORT_VNC:-15900}
         protocol: tcp
       - target: 5900
-        published: ${PORT_VNC:-5900}
+        published: ${PORT_VNC:-15900}
         protocol: udp
     restart: unless-stopped
     privileged: true
@@ -41,7 +41,7 @@ services:
     description:
       en_us: |
         Red is a fully modular bot – meaning all features and commands can be enabled/disabled to your liking, making it completely customizable. This version includes capabilities for streaming video and audio from VLC and a web browser.
-    developer: red-discordbot
+    developer: red-discordbot-shinsekai
     main: app
     port_map: ""
     scheme: http
