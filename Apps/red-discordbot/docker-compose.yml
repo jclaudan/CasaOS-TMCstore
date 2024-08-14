@@ -2,7 +2,7 @@ name: red-discordbot-shinsekai
 
 services:
   red-discordbot-shinsekai:
-    image: ghcr.io/jclaudan/CasaOS-TMCstore:red-discordbot-shinsekai-1.0.0
+    image: ghcr.io/jclaudan/casaos-tmcstore:red-discordbot-shinsekai-1.0.0
     container_name: red-discordbot-shinsekai
     environment:
       - PREFIX=.
