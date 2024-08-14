@@ -15,7 +15,7 @@ services:
       - DISPLAY=:99  # Pour les applications graphiques
     volumes:
       - type: bind
-        source: /DATA/AppData/Shinsekai-Store/$AppID/data
+        source: /DATA/AppData/Shinsekai-Store/data
         target: /data
       - /tmp/.X11-unix:/tmp/.X11-unix  # Nécessaire pour les applications graphiques
     ports:
@@ -70,7 +70,7 @@ services:
     container_name: ffmpeg
     command: ["-loglevel", "debug", "-i", "input", "-c:v", "libx264", "-f", "flv", "output"]
     volumes:
-      - /DATA/AppData/Shinsekai-Store/$AppID/data_ffmpeg:/data
+      - /DATA/AppData/Shinsekai-Store/data_ffmpeg:/data
     restart: unless-stopped
 
 x-casaos:
