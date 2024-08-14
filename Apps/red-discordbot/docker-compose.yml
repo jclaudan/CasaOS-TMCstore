@@ -29,44 +29,27 @@ services:
         protocol: udp
     restart: unless-stopped
     privileged: true
+
   x-casaos:
-    envs:
-      - container: PUID
-        description:
-          en_us: User ID under which the bot will run.
-      - container: PGID
-        description:
-          en_us: Group ID under which the bot will run.
-      - container: TOKEN
-        description:
-          en_us: Discord bot token.
-      - container: TZ
-        description:
-          en_us: Time zone of the container.
-    ports:
-      - container: ${PORT_OBS:-4444}
-        description:
-          en_us: Port for OBS WebSocket.
-      - container: ${PORT_VNC:-5900}
-        description:
-          en_us: Port for VNC access to the graphical environment.
-    volumes:
-      - container: /data
-        description:
-          en_us: Directory for storing bot data.
-    description:
-      en_us: |
-        Red is a fully modular bot – meaning all features and commands can be enabled/disabled to your liking, making it completely customizable. This version includes capabilities for streaming video and audio from VLC and a web browser.
     architectures:
       - amd64
       - arm64
       - arm
-    main: red-discordbot-shinsekai
-    author: Your Name or Organization
-    category: Multimedia
-    icon: https://path/to/your/icon.png
-    title:
-      en_us: Red Discord Bot with Streaming Capabilities
+    author: red-discordbot-shinsekai
+    category: ShinsekaiStore
+    icon: https://cdn.jsdelivr.net/gh/mariosemes/CasaOS-TMCstore@main/Apps/red-discordbot/icon.png
+    description:
+      en_us: |
+        Red is a fully modular bot – meaning all features and commands can be enabled/disabled to your liking, making it completely customizable. This version includes capabilities for streaming video and audio from VLC and a web browser.
+    developer: red-discordbot
+    main: app
+    port_map: ""
+    scheme: http
     tagline:
       en_us: A modular bot with video and audio streaming capabilities from VLC and a web browser.
-    thumbnail: https://path/to/your/thumbnail.png
+    store_app_id: red-discordbot-shinsekai
+    title:
+      en_us: Red Discord Bot with Streaming Capabilities
+    screenshot_link:
+      - https://cdn.jsdelivr.net/gh/mariosemes/CasaOS-TMCstore@main/Apps/red-discordbot/screenshot-01.png
+    thumbnail: https://cdn.jsdelivr.net/gh/mariosemes/CasaOS-TMCstore@main/Apps/red-discordbot/thumbnail.png
