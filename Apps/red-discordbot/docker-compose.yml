@@ -19,13 +19,13 @@ services:
       - /tmp/.X11-unix:/tmp/.X11-unix  # Nécessaire pour les applications graphiques
     ports:
       - target: 4444
-        published: ${PORT_OBS:-14444}
+        published: ${PORT_OBS:-10444}
         protocol: tcp
       - target: 5900
-        published: ${PORT_VNC:-15900}
+        published: ${PORT_VNC:-10900}
         protocol: tcp
       - target: 5900
-        published: ${PORT_VNC:-15900}
+        published: ${PORT_VNC:-10900}
         protocol: udp
     restart: unless-stopped
     privileged: true
