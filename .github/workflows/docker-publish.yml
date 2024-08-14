@@ -10,6 +10,7 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
+  TAG: red-discordbot-shinsekai-1.0.0  # Spécifiez ici le tag que vous voulez utiliser
 
 jobs:
   build:
@@ -40,6 +41,7 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: ${{ env.TAG }}  # Utilisez le tag spécifié
 
       - name: Build and push Docker image
         id: build-and-push
@@ -48,7 +50,7 @@ jobs:
           context: ./Apps/red-discordbot/  # Spécifie le contexte de construction
           file: ./Apps/red-discordbot/Dockerfile  # Spécifie le chemin vers le Dockerfile
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ steps.meta.outputs.tags }}
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.TAG }}  # Poussez l'image avec le tag spécifique
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
@@ -56,6 +58,6 @@ jobs:
       - name: Sign the published Docker image
         if: ${{ github.event_name != 'pull_request' }}
         env:
-          TAGS: ${{ steps.meta.outputs.tags }}
+          TAGS: ${{ steps.build-and-push.outputs.tags }}
           DIGEST: ${{ steps.build-and-push.outputs.digest }}
         run: echo "${TAGS}" | xargs -I {} cosign sign --yes {}@${DIGEST}
