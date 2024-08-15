@@ -1,6 +1,10 @@
 # Utiliser Ubuntu 22.04 comme base pour assurer la compatibilité avec les dernières versions de logiciels
 FROM ubuntu:22.04 AS base
 
+# Désactiver les interactions pendant l'installation des paquets
+ENV DEBIAN_FRONTEND=noninteractive
+ENV TZ=Europe/Paris  # Exemple de fuseau horaire, à ajuster selon tes besoins
+
 # Ajouter les dépendances nécessaires pour Red-DiscordBot et les applications de streaming
 RUN apt-get update && apt-get install -y --no-install-recommends \
     software-properties-common \
