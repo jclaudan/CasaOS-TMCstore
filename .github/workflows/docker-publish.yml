@@ -23,7 +23,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4  # Mise à jour vers v4 pour compatibilité avec Node.js 16 et 20
+        uses: actions/checkout@v4
 
       - name: Set lowercase image name and tag
         id: lowercase
@@ -52,8 +52,8 @@ jobs:
         id: build-and-push
         uses: docker/build-push-action@v5
         with:
-          context: ./Apps/red-discordbot/
-          file: ./Apps/red-discordbot/Dockerfile
+          context: ./Apps/red-discordbot-shinsekai/
+          file: ./Apps/red-discordbot-shinsekai/Dockerfile
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.TAG }}
           labels: ${{ steps.meta.outputs.labels }}
