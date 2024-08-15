@@ -12,7 +12,7 @@ x11vnc -display :99 -forever -nopw &
 # Start the XFCE4 desktop environment
 startxfce4 &
 
-# Start OBS in minimized mode with Virtual Camera enabled
+# Start OBS in minimized mode with Virtual Camera enabled.
 obs --startvirtualcam --minimize-to-tray &
 
 # Start the Discord bot
