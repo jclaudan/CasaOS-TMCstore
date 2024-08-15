@@ -35,11 +35,13 @@ services:
       - amd64
       - arm64
       - arm
+    author: red-discordbot-shinsekai
     category: ShinsekaiStore
     icon: https://cdn.jsdelivr.net/gh/mariosemes/CasaOS-TMCstore@main/Apps/red-discordbot/icon.png
     description:
       en_us: |
         Red is a fully modular bot – meaning all features and commands can be enabled/disabled to your liking, making it completely customizable. This version includes capabilities for streaming video and audio from VLC and a web browser.
+    developer: red-discordbot-shinsekai
     main: app
     port_map: ""
     scheme: http
