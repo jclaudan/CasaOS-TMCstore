@@ -1,29 +1,55 @@
-FROM phasecorex/red-discordbot:full
+name: red-discordbot-shinsekai
 
-# Add dependencies for streaming and controlling OBS, VLC, and a web browser
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    x11vnc \
-    xvfb \
-    obs-studio \
-    vlc \
-    firefox-esr \
-    xdotool \
-    wmctrl \
-    dbus-x11 \
-    ffmpeg \
-    v4l2loopback-dkms \
-    v4l2loopback-utils \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+services:
+  app:
+    image: ghcr.io/jclaudan/casaos-tmcstore:red-discordbot-shinsekai-1.0.0
+    container_name: red-discordbot-shinsekai
+    environment:
+      - PREFIX=.
+      - PREFIX2=!
+      - PUID=1000
+      - PGID=1000
+      - TOKEN=$DISCORD_TOKEN
+      - TZ=Etc/UTC
+      - DISPLAY=:99  # Pour les applications graphiques
+    volumes:
+      - type: bind
+        source: /DATA/AppData/Shinsekai-Store/$AppID/data
+        target: /data
+      - /tmp/.X11-unix:/tmp/.X11-unix  # Nécessaire pour les applications graphiques
+    ports:
+      - target: 4444
+        published: 10444
+        protocol: tcp
+      - target: 5900
+        published: 10900
+        protocol: tcp
+      - target: 5900
+        published: 10900
+        protocol: udp
+    restart: unless-stopped
+    privileged: true
 
-# Set up X virtual framebuffer for GUI applications
-ENV DISPLAY=:99
-
-# Expose the required ports for VNC and OBS WebSocket
-EXPOSE 5900 4444
-
-# Copy the entrypoint script
-COPY start.sh /start.sh
-RUN chmod +x /start.sh
-
-CMD ["/start.sh"]
+  x-casaos:
+    architectures:
+      - amd64
+      - arm64
+      - arm
+    author: red-discordbot-shinsekai
+    category: ShinsekaiStore
+    icon: https://cdn.jsdelivr.net/gh/jclaudan/CasaOS-TMCstore@main/Apps/red-discordbot/icon.png
+    description:
+      en_us: |
+        Red is a fully modular bot – meaning all features and commands can be enabled/disabled to your liking, making it completely customizable. This version includes capabilities for streaming video and audio from VLC and a web browser.
+    developer: red-discordbot-shinsekai
+    main: app
+    port_map: ""
+    scheme: http
+    tagline:
+      en_us: A modular bot with video and audio streaming capabilities from VLC and a web browser.
+    store_app_id: red-discordbot-shinsekai
+    title:
+      en_us: Red Discord Bot with Streaming Capabilities
+    screenshot_link:
+      - https://cdn.jsdelivr.net/gh/jclaudan/CasaOS-TMCstore@main/Apps/red-discordbot/screenshot-01.png
+    thumbnail: https://cdn.jsdelivr.net/gh/jclaudan/CasaOS-TMCstore@main/Apps/red-discordbot/thumbnail.png
