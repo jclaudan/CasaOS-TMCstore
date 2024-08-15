@@ -23,7 +23,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4  # Mise à jour vers v4 pour compatibilité avec Node.js 16 et 20
 
       - name: Set lowercase image name and tag
         id: lowercase
