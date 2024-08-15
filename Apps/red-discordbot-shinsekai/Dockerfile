@@ -15,11 +15,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     jq \
     openssh-client \
     x11vnc \
+    xvfb \
     obs-studio \
     vlc \
     firefox \
     xdotool \
     wmctrl \
+    xfce4 \
+    xfce4-terminal \
     dbus-x11 \
     ffmpeg \
     v4l2loopback-dkms \
@@ -42,6 +45,9 @@ VOLUME /data
 
 # Configurer les variables d'environnement pour Red-DiscordBot
 ENV SODIUM_INSTALL=system
+
+# Configurer les variables d'environnement pour les applications graphiques
+ENV DISPLAY=:99
 
 # Exposer les ports nécessaires pour VNC et OBS WebSocket
 EXPOSE 5900 4444
