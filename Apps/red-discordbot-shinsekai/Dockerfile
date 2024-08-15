@@ -1,6 +1,7 @@
 FROM phasecorex/red-discordbot:full
 
-# Add dependencies for streaming and controlling OBS, VLC, and a web browser
+# Add dependencies for streaming, controlling OBS, VLC, and a web browser
+# Add v4l2loopback for virtual camera support
 RUN apt-get update && apt-get install -y --no-install-recommends \
     x11vnc \
     xvfb \
@@ -13,6 +14,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     xfce4-terminal \
     dbus-x11 \
     ffmpeg \
+    v4l2loopback-dkms \
+    v4l2loopback-utils \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
