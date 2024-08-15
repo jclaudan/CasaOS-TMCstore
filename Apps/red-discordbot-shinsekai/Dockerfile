@@ -1,55 +1,63 @@
-name: red-discordbot-shinsekai
+# Utiliser Ubuntu 22.04 comme base pour assurer la compatibilité avec les dernières versions de logiciels
+FROM ubuntu:22.04 AS base
 
-services:
-  app:
-    image: ghcr.io/jclaudan/casaos-tmcstore:red-discordbot-shinsekai-1.0.0
-    container_name: red-discordbot-shinsekai
-    environment:
-      - PREFIX=.
-      - PREFIX2=!
-      - PUID=1000
-      - PGID=1000
-      - TOKEN=$DISCORD_TOKEN
-      - TZ=Etc/UTC
-      - DISPLAY=:99  # Pour les applications graphiques
-    volumes:
-      - type: bind
-        source: /DATA/AppData/Shinsekai-Store/$AppID/data
-        target: /data
-      - /tmp/.X11-unix:/tmp/.X11-unix  # Nécessaire pour les applications graphiques
-    ports:
-      - target: 4444
-        published: 10444
-        protocol: tcp
-      - target: 5900
-        published: 10900
-        protocol: tcp
-      - target: 5900
-        published: 10900
-        protocol: udp
-    restart: unless-stopped
-    privileged: true
+# Désactiver les interactions pendant l'installation des paquets
+ENV DEBIAN_FRONTEND=noninteractive
+ENV TZ=Europe/Paris
 
-  x-casaos:
-    architectures:
-      - amd64
-      - arm64
-      - arm
-    author: red-discordbot-shinsekai
-    category: ShinsekaiStore
-    icon: https://cdn.jsdelivr.net/gh/jclaudan/CasaOS-TMCstore@main/Apps/red-discordbot/icon.png
-    description:
-      en_us: |
-        Red is a fully modular bot – meaning all features and commands can be enabled/disabled to your liking, making it completely customizable. This version includes capabilities for streaming video and audio from VLC and a web browser.
-    developer: red-discordbot-shinsekai
-    main: app
-    port_map: ""
-    scheme: http
-    tagline:
-      en_us: A modular bot with video and audio streaming capabilities from VLC and a web browser.
-    store_app_id: red-discordbot-shinsekai
-    title:
-      en_us: Red Discord Bot with Streaming Capabilities
-    screenshot_link:
-      - https://cdn.jsdelivr.net/gh/jclaudan/CasaOS-TMCstore@main/Apps/red-discordbot/screenshot-01.png
-    thumbnail: https://cdn.jsdelivr.net/gh/jclaudan/CasaOS-TMCstore@main/Apps/red-discordbot/thumbnail.png
+# Ajouter les dépendances nécessaires pour Red-DiscordBot et les applications de streaming
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    software-properties-common \
+    build-essential \
+    git \
+    libsodium-dev \
+    libffi-dev \
+    jq \
+    openssh-client \
+    x11vnc \
+    obs-studio \
+    vlc \
+    firefox \
+    xdotool \
+    wmctrl \
+    dbus-x11 \
+    ffmpeg \
+    v4l2loopback-dkms \
+    v4l2loopback-utils \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# Configurer le script de point d'entrée pour PhasecoreX
+ADD https://raw.githubusercontent.com/PhasecoreX/docker-user-image/master/user-entrypoint.sh /bin/user-entrypoint
+RUN chmod +x /bin/user-entrypoint && /bin/user-entrypoint --init
+
+ENTRYPOINT ["/bin/user-entrypoint"]
+
+# Configurer les emplacements de configuration
+RUN mkdir -p /root/.config/Red-DiscordBot && \
+    mkdir -p /usr/local/share/Red-DiscordBot && \
+    mkdir -p /config/.config/Red-DiscordBot
+
+VOLUME /data
+
+# Configurer les variables d'environnement pour Red-DiscordBot
+ENV SODIUM_INSTALL=system
+
+# Exposer les ports nécessaires pour VNC et OBS WebSocket
+EXPOSE 5900 4444
+
+# Copier les fichiers root dans l'image Docker
+COPY root/ /
+
+# Définir la commande à exécuter au démarrage du conteneur
+CMD ["/app/start-redbot.sh"]
+
+# Étape pour configurer et démarrer le serveur Xvfb, VNC, et les autres services
+COPY start.sh /start.sh
+RUN chmod +x /start.sh
+
+# Construction finale qui exécute tout
+FROM base AS final
+
+# Démarrer tout via le script start.sh
+CMD ["/start.sh"]
