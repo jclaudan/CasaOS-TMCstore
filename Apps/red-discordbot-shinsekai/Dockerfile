@@ -1,3 +1,4 @@
+
 # Utiliser Ubuntu 22.04 comme base pour assurer la compatibilité avec les dernières versions de logiciels
 FROM ubuntu:22.04 AS base
 
@@ -67,3 +68,4 @@ FROM base AS final
 
 # Démarrer tout via le script start.sh
 CMD ["/start.sh"]
+
