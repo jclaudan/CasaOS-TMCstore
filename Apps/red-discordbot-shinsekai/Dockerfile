@@ -9,10 +9,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     firefox-esr \
     xdotool \
     wmctrl \
-    lxsession \
-    openbox \
-    lxde-core \
-    lxterminal \
+    xfce4 \
+    xfce4-terminal \
     dbus-x11 \
     ffmpeg \
     && apt-get clean \
