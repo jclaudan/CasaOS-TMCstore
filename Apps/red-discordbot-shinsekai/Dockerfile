@@ -14,7 +14,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# Set up X virtual framebuffer for GUI applications
+# Set up X virtual framebuffer for GUI applications.
 ENV DISPLAY=:99
 
 # Expose the required ports for VNC and OBS WebSocket
