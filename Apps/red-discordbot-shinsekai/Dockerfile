@@ -9,6 +9,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     firefox-esr \
     xdotool \
     wmctrl \
+    fluxbox \  # Ajout de fluxbox pour un gestionnaire de fenêtres
     ffmpeg \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
