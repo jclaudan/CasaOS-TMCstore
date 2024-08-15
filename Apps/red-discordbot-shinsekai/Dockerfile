@@ -1,8 +1,13 @@
 FROM phasecorex/red-discordbot:full
 
 # Add dependencies for streaming, controlling OBS, VLC, and a web browser
-# Add v4l2loopback for virtual camera support
+# Add v4l2loopback for virtual camera support and install the latest OBS Studio from source or PPA
+
+# Setup the environment to get the latest OBS Studio
 RUN apt-get update && apt-get install -y --no-install-recommends \
+    software-properties-common \
+    && add-apt-repository ppa:obsproject/obs-studio \
+    && apt-get update && apt-get install -y --no-install-recommends \
     x11vnc \
     xvfb \
     obs-studio \
