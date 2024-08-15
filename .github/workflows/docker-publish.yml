@@ -65,4 +65,11 @@ jobs:
         env:
           TAGS: ${{ steps.build-and-push.outputs.tags }}
           DIGEST: ${{ steps.build-and-push.outputs.digest }}
-        run: echo "${{ env.TAGS }}" | xargs -I {} cosign sign --yes {}@${{ env.DIGEST }}"
+        run: |
+          if [ -n "${{ env.TAGS }}" ] && [ -n "${{ env.DIGEST }}" ]; then
+            echo "${{ env.TAGS }}" | xargs -I {} cosign sign --yes {}@${{ env.DIGEST }}
+          else
+            echo "No tags or digest found to sign."
+            exit 1
+          fi
+
