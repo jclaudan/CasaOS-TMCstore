@@ -37,7 +37,7 @@ services:
       - arm
     author: red-discordbot-shinsekai
     category: ShinsekaiStore
-    icon: https://cdn.jsdelivr.net/gh/mariosemes/CasaOS-TMCstore@main/Apps/red-discordbot/icon.png
+    icon: https://cdn.jsdelivr.net/gh/jclaudan/CasaOS-TMCstore@main/Apps/red-discordbot/icon.png
     description:
       en_us: |
         Red is a fully modular bot – meaning all features and commands can be enabled/disabled to your liking, making it completely customizable. This version includes capabilities for streaming video and audio from VLC and a web browser.
@@ -51,5 +51,5 @@ services:
     title:
       en_us: Red Discord Bot with Streaming Capabilities
     screenshot_link:
-      - https://cdn.jsdelivr.net/gh/mariosemes/CasaOS-TMCstore@main/Apps/red-discordbot/screenshot-01.png
-    thumbnail: https://cdn.jsdelivr.net/gh/mariosemes/CasaOS-TMCstore@main/Apps/red-discordbot/thumbnail.png
+      - https://cdn.jsdelivr.net/gh/jclaudan/CasaOS-TMCstore@main/Apps/red-discordbot/screenshot-01.png
+    thumbnail: https://cdn.jsdelivr.net/gh/jclaudan/CasaOS-TMCstore@main/Apps/red-discordbot/thumbnail.png
